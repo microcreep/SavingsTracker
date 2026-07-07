@@ -7,30 +7,31 @@
 </head>
 <body class="bg-gray-100 h-screen flex items-center justify-center">
 
-<div class="bg-white p-8 rounded-2xl shadow-md text-center w-96">
-    <h2 class="text-2xl font-bold text-gray-800 mb-2">My Savings Tracker</h2>
-    <p id="status-text" class="text-gray-600 font-medium text-lg">Loading...</p>
-
-    <div class="w-full bg-gray-200 rounded-full h-6 my-6 overflow-hidden">
-        <div id="my-bar" class="bg-gradient-to-r from-green-400 to-emerald-500 h-full w-0 transition-all duration-1000 ease-out"></div>
+    <div class="bg-white p-8 rounded-2xl shadow-md text-center w-96">
+        <h2 class="text-2xl font-bold text-gray-800 mb-2">My Savings Tracker</h2>
+        <p id="status-text" class="text-gray-600 font-medium text-lg">Loading...</p>
+        
+        <div class="w-full bg-gray-200 rounded-full h-6 my-6 overflow-hidden">
+            <div id="my-bar" class="bg-gradient-to-r from-green-400 to-emerald-500 h-full w-0 transition-all duration-1000 ease-out"></div>
+        </div>
+        
+        <p class="text-sm text-gray-400">Target Goal: £4,000</p>
     </div>
 
-    <p class="text-sm text-gray-400">Target Goal: £4,000</p>
-</div>
-
-<script>
-    async function loadSavings() {
-        try {
-            const response = await fetch('/api/savings');
-            const data = await response.json();
-
-            document.getElementById('status-text').innerText = `$${data.current} / $${data.goal}`;
-            document.getElementById('my-bar').style.width = `${data.progressPercentage}%`;
-        } catch (error) {
-            document.getElementById('status-text').innerText = "Error loading goal.";
+    <script>
+        async function loadSavings() {
+            try {
+                const response = await fetch('/api/savings');
+                const data = await response.json();
+                
+                // Formats numbers to look like £250.00 / £4,000.00
+                document.getElementById('status-text').innerText = `£${data.current} / £${data.goal}`;
+                document.getElementById('my-bar').style.width = `${data.progressPercentage}%`;
+            } catch (error) {
+                document.getElementById('status-text').innerText = "Error loading goal.";
+            }
         }
-    }
-    loadSavings();
-</script>
+        loadSavings();
+    </script>
 </body>
 </html>

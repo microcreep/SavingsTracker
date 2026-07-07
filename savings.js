@@ -1,6 +1,7 @@
-let currentSavings = 0.00;
-const savingsGoal = 4000.00;
-const secretApiKey = "MySuperSecretKey123"; // You'll use this key to add/remove money later
+// Updated goal to 4000 pounds!
+let currentSavings = 250.00;
+const savingsGoal = 4000.00; 
+const secretApiKey = "MySuperSecretKey123"; 
 
 export default function handler(req, res) {
     if (req.method === 'GET') {
@@ -17,11 +18,11 @@ export default function handler(req, res) {
         const { amount } = req.body;
 
         if (clientApiKey !== secretApiKey) {
-            return res.status(401).json({ error: "Unauthorized. Invalid API Key." });
+            return res.status(401).json({ error: "Unauthorized." });
         }
 
         if (typeof amount !== 'number') {
-            return res.status(400).json({ error: "Please provide a valid number amount." });
+            return res.status(400).json({ error: "Invalid amount." });
         }
 
         currentSavings += amount;

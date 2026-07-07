@@ -1,5 +1,5 @@
 // Updated goal to 4000 pounds!
-let currentSavings = 250.00;
+let currentSavings = 0.00;
 const savingsGoal = 4000.00; 
 const secretApiKey = "MySuperSecretKey123"; 
 
